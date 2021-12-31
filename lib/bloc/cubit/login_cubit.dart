@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 import 'package:tik_tok_app/model/user.dart';
+import 'package:tik_tok_app/utils/shared_pref.dart';
 
 part 'login_state.dart';
 
@@ -17,22 +18,12 @@ class LoginCubit extends Cubit<LoginState> {
       /// signingi out the user, so that google login
       /// accoutns are shown every single time
 
-      // final googleSignIn = await GoogleSignIn();
-      // await googleSignIn.signOut();
+      final googleSignIn = await GoogleSignIn();
+      await googleSignIn.signOut();
 
-//
+      ///
 
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      Useer? user;
-      if (googleUser != null) {
-        user = Useer(
-          email: googleUser.email,
-          photoUrl: googleUser.photoUrl,
-          displayName: googleUser.displayName,
-          id: googleUser.id,
-        );
-      }
 
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
@@ -42,9 +33,21 @@ class LoginCubit extends Cubit<LoginState> {
         idToken: googleAuth?.idToken,
       );
 
-////
-      FirebaseAuth.instance.signInWithCredential(credential);
-      
+      ///
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      Useer? user;
+      if (googleUser != null) {
+        user = Useer(
+          email: googleUser.email,
+          photoUrl: googleUser.photoUrl,
+          displayName: googleUser.displayName,
+          id: googleUser.id,
+        );
+
+        await SharedPref.saveUserData(user);
+      }
+
       emit(LoginSuccess(data: user));
     } catch (e, s) {
       print(e);
