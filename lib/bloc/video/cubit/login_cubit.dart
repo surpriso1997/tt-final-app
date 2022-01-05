@@ -38,7 +38,8 @@ class LoginCubit extends Cubit<LoginState> {
 
       Useer? user;
       if (googleUser != null) {
-        user = Useer(
+        user = new Useer(
+          token: googleAuth?.accessToken ?? "randmotoken",
           email: googleUser.email,
           photoUrl: googleUser.photoUrl,
           displayName: googleUser.displayName,

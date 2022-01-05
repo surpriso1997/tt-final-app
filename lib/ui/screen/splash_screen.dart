@@ -32,12 +32,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       body: BlocBuilder(
         bloc: videoCubit,
         builder: (context, state) {
           print(state);
-          
+
           if (state is VideosLoading) {
             return CircularProgressIndicator(strokeWidth: 2);
           } else if (state is VideosError) {
@@ -49,29 +51,16 @@ class _SplashScreenState extends State<SplashScreen> {
           } else if (state is VideosFetchSuccess) {
             final hits = state.data;
 
+            /// total hits=20
+
             return PageView.builder(
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
                   print("page index is : $index");
+
+                  /// index=15
 
                   videoCubit.loadMoreVideos();
-                },
-                itemBuilder: (context, index) {
-                  Hit videoHit = hits[index];
-
-                  return BetterPlayer.network(videoHit.videos.small.url);
-                });
-          } else if (state is VideoLoadingMoreData) {
-            final hits = state.data;
-
-            return PageView.builder(
-                scrollDirection: Axis.vertical,
-                onPageChanged: (index) {
-                  print("page index is : $index");
-
-                  if (hits.length - index == 5) {
-                    videoCubit.loadMoreVideos();
-                  }
                 },
                 itemBuilder: (context, index) {
                   Hit videoHit = hits[index];

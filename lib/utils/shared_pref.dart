@@ -6,20 +6,27 @@ import 'package:tik_tok_app/model/user.dart';
 class SharedPref {
   static const USER_KEY = "user";
 
-  static  saveUserData(Useer user) async {
+  static saveUserData(Useer userData) async {
     final instancee = await SharedPreferences.getInstance();
-    final userStringJsson = user.toJson();
-    final userString = json.encode(userStringJsson);
+
+    final userJson = userData.toJson();
+
+    final userString = json.encode(userJson);
+
     instancee.setString(USER_KEY, userString);
   }
 
   static Future<Useer?> getUserData() async {
     final instancee = await SharedPreferences.getInstance();
+
     final userString = instancee.getString(USER_KEY);
+
     if (userString == null) {
       return null;
     }
+
     final decodedUser = json.decode(userString);
+
     final Useer user = Useer.fromJson(decodedUser);
     return user;
   }

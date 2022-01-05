@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tik_tok_app/bloc/cubit/login_cubit.dart';
+import 'package:tik_tok_app/bloc/video/cubit/login_cubit.dart';
 import 'package:tik_tok_app/nav/routes.dart';
 import 'package:tik_tok_app/utils/assets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,13 +18,12 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
   }
 
-  LoginCubit loginCubit = LoginCubit();
-
   @override
   Widget build(BuildContext context) {
+    // final loginCubit = BlocProvider.of<LoginCubit>(context);
+
     return Scaffold(
-      body: BlocListener(
-        bloc: loginCubit,
+      body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginLoading) {
           } else if (state is LoginError) {
@@ -45,7 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {
-                  loginCubit.signInWithGoogle();
+                  // this line and the line below that are same thing
+                  // BlocProvider.of<LoginCubit>(context).signInWithGoogle();
+
+                  context.read<LoginCubit>().signInWithGoogle();
                 },
                 child: Container(
                   padding: EdgeInsets.all(8),
