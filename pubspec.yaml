@@ -36,6 +36,7 @@ dependencies:
   #   ui
   cupertino_icons: ^1.0.2
   fluttertoast: 8.0.8
+  flutter_custom_clippers: ^2.0.0
 
   # video
   better_player: 0.0.79

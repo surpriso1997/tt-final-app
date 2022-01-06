@@ -1,9 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tik_tok_app">
+ 
+ <!-- 
+
+gallery , camera , location, 
+microphone, internet 
+
+http://
+
+https://
+
+
+  -->
+  
+ 
    <application
         android:label="tik_tok_app"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -10,6 +10,21 @@ class VideoScreen extends StatefulWidget {
 class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(),
+          SliverToBoxAdapter(
+            child: Column(),
+          ),
+// SliverList(delegate: delegate)
+// SliverGrid(delegate: delegate, gridDelegate: gridDelegate),
+// SliverAnimatedList(itemBuilder: itemBuilder),
+
+          // RenderBox
+          // RenderSliver
+        ],
+      ),
+    );
   }
 }
