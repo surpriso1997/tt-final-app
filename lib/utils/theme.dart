@@ -4,6 +4,9 @@ class AppTheme {
   static const Color primaryColor = Colors.red;
   static const Color darkThemeTextColor = Colors.white;
   static const Color lightThemeTextcolor = Colors.black;
+
+  static const formTextColor = Color(0xffA1A0AC);
+  
   static final lightTheme = ThemeData(
     primaryColor: primaryColor,
     scaffoldBackgroundColor: Colors.white,

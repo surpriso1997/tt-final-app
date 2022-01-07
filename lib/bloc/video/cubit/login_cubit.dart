@@ -57,4 +57,6 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginError(message: "Google sign in failed"));
     }
   }
+
+  signInWithEmail() async {}
 }
